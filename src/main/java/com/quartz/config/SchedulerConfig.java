@@ -1,5 +1,6 @@
-package com.application.mian;
+package com.quartz.config;
 
+import com.quartz.job.HiJob;
 import org.quartz.Scheduler;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;

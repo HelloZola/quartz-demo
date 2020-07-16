@@ -1,9 +1,8 @@
-package com.application.mian;
+package com.quartz.job;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.Scheduler;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

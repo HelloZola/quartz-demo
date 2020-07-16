@@ -1,5 +1,7 @@
-package com.application.mian;
+package com.controller;
 
+import com.quartz.job.HiJob;
+import com.quartz.manager.QuartzJobManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +17,16 @@ public class HelloController {
     @Autowired
     QuartzJobManager quartzJobManager;
 
+    /**
+     * http://localhost:8090/hello/add
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping("add")
     public String add(HttpServletRequest request) {
 
-//        //任务名称
+        //任务名称
 //        String name = request.getParameter("name");
 //        //任务组名称
 //        String groupName = "task";
