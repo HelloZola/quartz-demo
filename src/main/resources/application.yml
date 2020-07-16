@@ -1,0 +1,3 @@
+server:
+  port: 8090
+  session-timeout: 30
