@@ -16,14 +16,9 @@
     <groupId>com.quartz.demo</groupId>
     <artifactId>quartz-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
-
        
     <packaging>jar</packaging>
-       
-    <name>quartz-demo</name>
-       
-    <description>Demo project for Spring Boot</description>
-       
+    <!--   -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -56,6 +51,12 @@
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.5.2</version>
+            <exclusions>
+                <exclusion>  <!-- declare the exclusion here -->
+                    <groupId>c3p0</groupId>
+                    <artifactId>c3p0</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -65,12 +66,74 @@
             <version>8.0.14</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>c3p0</groupId>-->
+            <!--<artifactId>c3p0</artifactId>-->
+            <!--<version>0.9.1.2</version>-->
+            <!--<exclusions>-->
+                <!--<exclusion>  &lt;!&ndash; declare the exclusion here &ndash;&gt;-->
+                    <!--<groupId>com.mchange</groupId>-->
+                    <!--<artifactId>c3p0</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+
         <dependency>
-            <groupId>c3p0</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.1.2</version>
+            <groupId>com.mchange</groupId>
+            <artifactId>mchange-commons-java</artifactId>
+            <version>0.2.11</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>  <!-- declare the exclusion here -->
+                    <groupId>c3p0</groupId>
+                    <artifactId>c3p0</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP-java6</artifactId>
+            <version>2.3.13</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+            <scope>compile</scope>
         </dependency>
 
+        <!--<dependency>-->
+        <!--<groupId>org.terracotta.toolkit</groupId>-->
+        <!--<artifactId>terracotta-toolkit-api</artifactId>-->
+        <!--<version>2.1.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>org.terracotta.toolkit</groupId>-->
+        <!--<artifactId>terracotta-toolkit-api-internal</artifactId>-->
+        <!--<version>2.2.0</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.atomikos</groupId>
+            <artifactId>transactions</artifactId>
+            <version>3.9.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jboss/jboss-system -->
+        <dependency>
+            <groupId>jboss</groupId>
+            <artifactId>jboss-system</artifactId>
+            <version>3.2.3</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
