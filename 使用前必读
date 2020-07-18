@@ -1,0 +1,9 @@
+
+1.部分本地包放置在：src\main\local，编译前请加入到第三方库；
+
+2.数据库脚本放置在：src\main\resources\quartz.sql，启动前执行；
+
+3.com\controller\HelloController.java 用来验证启动是否成功，HelloController.createJobDemo可用来创建测试jop;
+
+
+
