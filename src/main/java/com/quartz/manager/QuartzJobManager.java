@@ -54,9 +54,13 @@ public class QuartzJobManager {
             //构建job信息
             JobDetail jobDetail = JobBuilder.newJob(((Job) clazz.newInstance()).getClass()).withIdentity(jobName, jobGroupName).build();
             //表达式调度构建器(即任务执行的时间)
-            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
+            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder
+                    .cronSchedule(cronExpression)
+                    .withMisfireHandlingInstructionDoNothing();
             //按新的cronExpression表达式构建一个新的trigger
-            CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroupName).withSchedule(scheduleBuilder).build();
+            CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroupName)
+                    .withSchedule(scheduleBuilder)
+                    .build();
             //获得JobDataMap，写入数据
             if (argMap != null) {
                 trigger.getJobDataMap().putAll(argMap);
