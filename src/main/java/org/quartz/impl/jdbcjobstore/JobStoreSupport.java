@@ -970,6 +970,8 @@ public abstract class JobStoreSupport implements JobStore, Constants {
                         conn, STATE_WAITING, getMisfireTime(),
                         maxMisfiresToHandleAtATime, misfiredTriggers);
 
+        //hasMoreMisfiredTriggers=true代表失火的触发器已经达到了设置的限制值
+        //hasMoreMisfiredTriggers=false代表不能存在失火的触发器，或者失火的触发器数目没有达到了设置的限制值
         if (hasMoreMisfiredTriggers) {
             getLog().info(
                     "Handling the first " + misfiredTriggers.size() +
@@ -993,8 +995,9 @@ public abstract class JobStoreSupport implements JobStore, Constants {
         for (TriggerKey triggerKey : misfiredTriggers) {
 
             System.out.println("对失火触发器执行策略:" + triggerKey.getName());
-            OperableTrigger trig =
-                    retrieveTrigger(conn, triggerKey);
+
+            //找出触发器
+            OperableTrigger trig = retrieveTrigger(conn, triggerKey);
 
             String fireInfo = triggerKey + " 对失火触发器执行策略,失火触发器下一次执行时间：" + TimeUtil.formatDate(trig.getNextFireTime()) + " 当前时间：" + TimeUtil.getTimeNow();
             FireUtil.addFire(fireInfo);
@@ -4044,7 +4047,9 @@ public abstract class JobStoreSupport implements JobStore, Constants {
                 }
 
                 if (!shutdown) {
-                    long timeToSleep = 50l;  // At least a short pause to help balance threads
+                    long timeToSleep = 50l;
+                    // At least a short pause to help balance threads
+
                     if (!recoverMisfiredJobsResult.hasMoreMisfiredTriggers()) {
                         timeToSleep = getMisfireThreshold() - (System.currentTimeMillis() - sTime);
                         if (timeToSleep <= 0) {
@@ -4056,6 +4061,7 @@ public abstract class JobStoreSupport implements JobStore, Constants {
                         }
                     }
 
+                    // hasMoreMisfiredTriggers=true 说明失火触发器超过了最大值，那么就sleep的少一点
                     try {
                         Thread.sleep(timeToSleep);
                     } catch (Exception ignore) {

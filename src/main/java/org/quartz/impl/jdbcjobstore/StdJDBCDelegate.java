@@ -348,6 +348,7 @@ public class StdJDBCDelegate implements DriverDelegate, StdJDBCConstants {
             ps.setString(2, state1);
             rs = ps.executeQuery();
 
+            //是否达到了最大限制
             boolean hasReachedLimit = false;
             while (rs.next() && (hasReachedLimit == false)) {
                 if (resultList.size() == count) {
@@ -1783,6 +1784,7 @@ public class StdJDBCDelegate implements DriverDelegate, StdJDBCConstants {
                 }
             }
 
+            String nextFileTime = TimeUtil.formatDate(trigger.getNextFireTime());
             return trigger;
         } finally {
             closeResultSet(rs);
