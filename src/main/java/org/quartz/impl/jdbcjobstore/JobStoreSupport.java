@@ -1004,6 +1004,7 @@ public abstract class JobStoreSupport implements JobStore, Constants {
                 continue;
             }
 
+            //更新已经失火的触发器
             doUpdateOfMisfiredTrigger(conn, trig, false, STATE_WAITING, recovering);
 
             if (trig.getNextFireTime() != null && trig.getNextFireTime().getTime() < earliestNewTime)
@@ -1048,6 +1049,7 @@ public abstract class JobStoreSupport implements JobStore, Constants {
 
         schedSignaler.notifyTriggerListenersMisfired(trig);
 
+        //更新触发器的NEXT_FIRE_TIME
         trig.updateAfterMisfire(cal);
 
         if (trig.getNextFireTime() == null) {
